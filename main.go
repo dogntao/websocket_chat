@@ -61,11 +61,9 @@ func ws(w http.ResponseWriter, r *http.Request) {
 			userLoinArr := strings.Split(string(mg), " ")
 			toUser := strings.Replace(userLoinArr[0], "@", "", -1)
 			// 处理信息
-			userLoinArr = userLoinArr[1:]
-			userMessage := strings.Join(userLoinArr, " ")
 			if toUser != "" {
 				// 私聊信息
-				message := &message{conUserMap[con], toUser, mt, "@" + toUser + " " + userMessage, currentTime}
+				message := &message{conUserMap[con], toUser, mt, string(mg), currentTime}
 				messageQueue <- message
 			}
 		} else {
